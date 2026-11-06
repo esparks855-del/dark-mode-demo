@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>peck. dark mode demo</title><style>
+:root{--bg:#f5f6f8;--card:#ffffff;--text:#1c1e22;--muted:#6b7280;--accent:#0ea5e9;--border:#e5e7eb}
+body.dark{--bg:#0f1115;--card:#1a1d24;--text:#e7e9ee;--muted:#9aa1ad;--accent:#38bdf8;--border:#2a2e38}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;transition:background .3s,color .3s}
+header{display:flex;justify-content:space-between;align-items:center;padding:14px 22px;border-bottom:1px solid var(--border)}
+.logo{font-weight:800;font-size:22px;color:var(--accent)}
+#themeToggle{font-size:20px;padding:8px 16px;border:2px solid var(--border);border-radius:20px;background:var(--card);color:var(--text);cursor:pointer}
+#themeToggle:hover{border-color:var(--accent)}
+.wrap{display:flex;gap:20px;max-width:860px;margin:22px auto;padding:0 18px}
+.feed{flex:1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;margin-bottom:14px;transition:background .3s}
+.avatar{display:inline-block;width:38px;height:38px;border-radius:50%;background:var(--accent);color:#fff;text-align:center;line-height:38px;font-weight:700;margin-right:10px}
+.name{font-weight:700}
+.handle{color:var(--muted);font-size:14px}
+.post{margin-top:8px;font-size:15px}
+.side{width:240px}
+.side h3{margin:4px 0 10px;font-size:15px;color:var(--muted)}
+.side .card{font-size:14px}
+.hint{text-align:center;color:var(--muted);font-size:13px;margin-top:6px}
+</style></head><body>
+<header>
+  <span class="logo">peck.</span>
+  <button id="themeToggle" title="switch theme">&#9790; Dark</button>
+</header>
+<div class="wrap">
+  <div class="feed">
+    <div class="card"><span class="avatar">E</span><span class="name">Erik S.</span> <span class="handle">@eriks &middot; 2m</span>
+      <div class="post">first post on peck. the whole page is one HTML file and the theme swap is one class change</div></div>
+    <div class="card"><span class="avatar">P</span><span class="name">peck team</span> <span class="handle">@peck &middot; 1h</span>
+      <div class="post">hit the moon button in the corner. your choice sticks after a reload, just like a real site</div></div>
+  </div>
+  <div class="side">
+    <h3>Trending on peck</h3>
+    <div class="card">#darkmode<br>#onehtmlfile<br>#classToggle</div>
+  </div>
+</div>
+<div class="hint">demo layout for a DOM manipulation example &middot; the toggle is the point</div>
+<script>
+const toggle = document.getElementById("themeToggle");
+const root = document.body;
+if (localStorage.getItem("theme") === "dark") root.classList.add("dark");
+function refresh(){ toggle.innerHTML = root.classList.contains("dark") ? "&#9788; Light" : "&#9790; Dark"; }
+if (toggle) {
+  toggle.addEventListener("click", () => {
+    const dark = root.classList.toggle("dark");
+    localStorage.setItem("theme", dark ? "dark" : "light");
+    refresh();
+  });
+  refresh();
+}
+</script></body></html>
